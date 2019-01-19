@@ -34,7 +34,28 @@ abstract class PlaylistRoomDatabase: RoomDatabase() {
                 PlaylistRoomDatabase::class.java,
                 "playlist.sqlite"
             )
+                .addCallback(object: RoomDatabase.Callback() {
+                    override fun onCreate(db: SupportSQLiteDatabase) {
+                        super.onCreate(db)
+                        populateDb(context)
+                    }
+                })
                 .build()
+        }
+
+        fun populateDb(context: Context) {
+            GlobalScope.launch {
+                // Insert album
+                getInstance(context).albumDao().insert(AlbumEntity(name = "The Wall", year = 1979))
+                getInstance(context).albumDao().insert(AlbumEntity(name = "Supernatural", year = 1999))
+
+                // Insert track
+                getInstance(context).trackDao().insert(TrackEntity(trackName = "The Thin Ice", duration = 245))
+                getInstance(context).trackDao().insert(TrackEntity(trackName = "Another Brick in the Wall", duration = 546))
+
+                getInstance(context).trackDao().insert(TrackEntity(trackName = "One Fine Morning", duration = 362))
+                getInstance(context).trackDao().insert(TrackEntity(trackName = "The Calling", duration = 238))
+            }
         }
     }
 }

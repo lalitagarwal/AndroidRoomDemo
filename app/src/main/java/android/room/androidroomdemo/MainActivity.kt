@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         playlistRoomDatabase = PlaylistRoomDatabase.getInstance(this)
         GlobalScope.launch {
-            playlistRoomDatabase?.albumDao()?.insert(AlbumEntity(name = "The Wall", year = 1979))
+            playlistRoomDatabase?.albumDao()?.getAlbums()
         }
     }
 }
