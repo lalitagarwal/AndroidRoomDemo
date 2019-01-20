@@ -2,8 +2,10 @@ package android.room.androidroomdemo
 
 import android.content.Context
 import android.room.androidroomdemo.dao.AlbumDao
+import android.room.androidroomdemo.dao.ArtistDao
 import android.room.androidroomdemo.dao.TrackDao
 import android.room.androidroomdemo.entity.AlbumEntity
+import android.room.androidroomdemo.entity.ArtistEntity
 import android.room.androidroomdemo.entity.DateToLongConverter
 import android.room.androidroomdemo.entity.TrackEntity
 import androidx.room.*
@@ -12,11 +14,12 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 
-@Database(entities = [AlbumEntity::class, TrackEntity::class], version = 1, exportSchema = false)
+@Database(entities = [AlbumEntity::class, TrackEntity::class, ArtistEntity::class], version = 1, exportSchema = false)
 @TypeConverters(DateToLongConverter::class)
 abstract class PlaylistRoomDatabase: RoomDatabase() {
     abstract fun albumDao(): AlbumDao
     abstract fun trackDao(): TrackDao
+    abstract fun artistDao(): ArtistDao
 
     companion object {
         var playlistRoomDatabase: PlaylistRoomDatabase? = null
@@ -48,12 +51,16 @@ abstract class PlaylistRoomDatabase: RoomDatabase() {
             GlobalScope.launch {
                 val calendar = Calendar.getInstance()
 
+                // Insert Artist
+                getInstance(context).artistDao().insert(ArtistEntity(1, "Pink Floyd", "Progressive Rock", "UK"))
+                getInstance(context).artistDao().insert(ArtistEntity(2, "Santana", "Latin Rock", "US"))
+
                 // Insert album
                 calendar.set(1979, 11, 30)
-                getInstance(context).albumDao().insert(AlbumEntity(name = "The Wall", artist = "Pink Floyd", dateReleased =  calendar.time))
+                getInstance(context).albumDao().insert(AlbumEntity(name = "The Wall", artistId = 1, dateReleased =  calendar.time))
 
                 calendar.set(1999, 6, 15)
-                getInstance(context).albumDao().insert(AlbumEntity(name = "Supernatural", artist = "Santana", dateReleased = calendar.time))
+                getInstance(context).albumDao().insert(AlbumEntity(name = "Supernatural", artistId = 2, dateReleased = calendar.time))
 
                 // Insert track
                 getInstance(context).trackDao().insert(TrackEntity(albumId= 1, trackName = "The Thin Ice", duration = 245))
