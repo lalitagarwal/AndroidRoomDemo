@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "albums")
 data class AlbumEntity(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "album_id")
-    var albumId: Int = 0,
+    @ColumnInfo(name = "id")
+    var id: Int = 0,
 
     @ColumnInfo(name = "name")
     var name: String,

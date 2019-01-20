@@ -50,11 +50,11 @@ abstract class PlaylistRoomDatabase: RoomDatabase() {
                 getInstance(context).albumDao().insert(AlbumEntity(name = "Supernatural", year = 1999))
 
                 // Insert track
-                getInstance(context).trackDao().insert(TrackEntity(trackName = "The Thin Ice", duration = 245))
-                getInstance(context).trackDao().insert(TrackEntity(trackName = "Another Brick in the Wall", duration = 546))
+                getInstance(context).trackDao().insert(TrackEntity(albumId= 1, trackName = "The Thin Ice", duration = 245))
+                getInstance(context).trackDao().insert(TrackEntity(albumId= 1, trackName = "Another Brick in the Wall", duration = 546))
 
-                getInstance(context).trackDao().insert(TrackEntity(trackName = "One Fine Morning", duration = 362))
-                getInstance(context).trackDao().insert(TrackEntity(trackName = "The Calling", duration = 238))
+                getInstance(context).trackDao().insert(TrackEntity(albumId= 2, trackName = "One Fine Morning", duration = 362))
+                getInstance(context).trackDao().insert(TrackEntity(albumId= 2, trackName = "The Calling", duration = 238))
             }
         }
     }
