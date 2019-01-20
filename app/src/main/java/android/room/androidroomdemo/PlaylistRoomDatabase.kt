@@ -4,15 +4,16 @@ import android.content.Context
 import android.room.androidroomdemo.dao.AlbumDao
 import android.room.androidroomdemo.dao.TrackDao
 import android.room.androidroomdemo.entity.AlbumEntity
+import android.room.androidroomdemo.entity.DateToLongConverter
 import android.room.androidroomdemo.entity.TrackEntity
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.*
 
 @Database(entities = [AlbumEntity::class, TrackEntity::class], version = 1, exportSchema = false)
+@TypeConverters(DateToLongConverter::class)
 abstract class PlaylistRoomDatabase: RoomDatabase() {
     abstract fun albumDao(): AlbumDao
     abstract fun trackDao(): TrackDao
@@ -45,9 +46,14 @@ abstract class PlaylistRoomDatabase: RoomDatabase() {
 
         fun populateDb(context: Context) {
             GlobalScope.launch {
+                val calendar = Calendar.getInstance()
+
                 // Insert album
-                getInstance(context).albumDao().insert(AlbumEntity(name = "The Wall", year = 1979))
-                getInstance(context).albumDao().insert(AlbumEntity(name = "Supernatural", year = 1999))
+                calendar.set(1979, 11, 30)
+                getInstance(context).albumDao().insert(AlbumEntity(name = "The Wall", artist = "Pink Floyd", dateReleased =  calendar.time))
+
+                calendar.set(1999, 6, 15)
+                getInstance(context).albumDao().insert(AlbumEntity(name = "Supernatural", artist = "Santana", dateReleased = calendar.time))
 
                 // Insert track
                 getInstance(context).trackDao().insert(TrackEntity(albumId= 1, trackName = "The Thin Ice", duration = 245))
