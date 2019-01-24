@@ -6,20 +6,20 @@ import androidx.room.ForeignKey.CASCADE
 // onDelete = Cascade specifies that if the album is deleted, delete all the tracks of that column
 @Entity(tableName = "tracks",
         foreignKeys = [ForeignKey(
-            entity = AlbumEntity::class,
-            parentColumns = arrayOf("id"),
-            childColumns = arrayOf("album_id"),
+            entity = ArtistEntity::class,
+            parentColumns = ["id"],
+            childColumns = ["artist_id"],
             onDelete = CASCADE
         )],
-        indices = [Index(value = ["album_id"])]
+        indices = [Index(value = ["artist_id"])]
 )
 class TrackEntity (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "track_id")
     var trackId: Int = 0,
 
-    @ColumnInfo(name = "album_id")
-    var albumId: Int,
+    @ColumnInfo(name = "artist_id")
+    var artistId: Int,
 
     @ColumnInfo(name = "track_name")
     var trackName: String,

@@ -1,23 +1,19 @@
 package android.room.androidroomdemo
 
 import android.content.Context
-import android.room.androidroomdemo.dao.AlbumDao
 import android.room.androidroomdemo.dao.ArtistDao
 import android.room.androidroomdemo.dao.TrackDao
-import android.room.androidroomdemo.entity.AlbumEntity
-import android.room.androidroomdemo.entity.ArtistEntity
-import android.room.androidroomdemo.entity.DateToLongConverter
-import android.room.androidroomdemo.entity.TrackEntity
+import android.room.androidroomdemo.entity.*
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 
-@Database(entities = [AlbumEntity::class, TrackEntity::class, ArtistEntity::class], version = 1, exportSchema = false)
+@Database(entities = [TrackEntity::class, ArtistEntity::class],
+          version = 1, exportSchema = false)
 @TypeConverters(DateToLongConverter::class)
 abstract class PlaylistRoomDatabase: RoomDatabase() {
-    abstract fun albumDao(): AlbumDao
     abstract fun trackDao(): TrackDao
     abstract fun artistDao(): ArtistDao
 
@@ -55,19 +51,12 @@ abstract class PlaylistRoomDatabase: RoomDatabase() {
                 getInstance(context).artistDao().insert(ArtistEntity(1, "Pink Floyd", "Progressive Rock", "UK"))
                 getInstance(context).artistDao().insert(ArtistEntity(2, "Santana", "Latin Rock", "US"))
 
-                // Insert album
-                calendar.set(1979, 11, 30)
-                getInstance(context).albumDao().insert(AlbumEntity(name = "The Wall", artistId = 1, dateReleased =  calendar.time))
-
-                calendar.set(1999, 6, 15)
-                getInstance(context).albumDao().insert(AlbumEntity(name = "Supernatural", artistId = 2, dateReleased = calendar.time))
-
                 // Insert track
-                getInstance(context).trackDao().insert(TrackEntity(albumId= 1, trackName = "The Thin Ice", duration = 245))
-                getInstance(context).trackDao().insert(TrackEntity(albumId= 1, trackName = "Another Brick in the Wall", duration = 546))
+                getInstance(context).trackDao().insert(TrackEntity(artistId= 1, trackName = "The Thin Ice", duration = 245))
+                getInstance(context).trackDao().insert(TrackEntity(artistId= 1, trackName = "Another Brick in the Wall", duration = 546))
 
-                getInstance(context).trackDao().insert(TrackEntity(albumId= 2, trackName = "One Fine Morning", duration = 362))
-                getInstance(context).trackDao().insert(TrackEntity(albumId= 2, trackName = "The Calling", duration = 238))
+                getInstance(context).trackDao().insert(TrackEntity(artistId= 2, trackName = "One Fine Morning", duration = 362))
+                getInstance(context).trackDao().insert(TrackEntity(artistId= 2, trackName = "The Calling", duration = 238))
             }
         }
     }

@@ -2,7 +2,6 @@ package android.room.androidroomdemo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.room.androidroomdemo.entity.AlbumEntity
 import com.facebook.stetho.Stetho
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -18,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         playlistRoomDatabase = PlaylistRoomDatabase.getInstance(this)
         GlobalScope.launch {
-            playlistRoomDatabase?.albumDao()?.getAlbums()
+            playlistRoomDatabase?.trackDao()?.getTracks()
         }
     }
 }
