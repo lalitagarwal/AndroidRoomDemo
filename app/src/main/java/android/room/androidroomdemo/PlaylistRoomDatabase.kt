@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 @Database(entities = [TrackEntity::class, ArtistEntity::class],
+          views = [AlbumArtistJoinEntity::class],
           version = 1, exportSchema = false)
 @TypeConverters(DateToLongConverter::class)
 abstract class PlaylistRoomDatabase: RoomDatabase() {
