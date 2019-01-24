@@ -2,6 +2,7 @@ package android.room.androidroomdemo.entity
 
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
+import java.util.*
 
 // onDelete = Cascade specifies that if the album is deleted, delete all the tracks of that column
 @Entity(tableName = "tracks",
@@ -25,5 +26,8 @@ class TrackEntity (
     var trackName: String,
 
     @ColumnInfo(name = "duration")
-    var duration: Long
+    var duration: Long,
+
+    @ColumnInfo(name = "date_released")
+    var dateReleased: Date
 )

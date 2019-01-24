@@ -51,12 +51,15 @@ abstract class PlaylistRoomDatabase: RoomDatabase() {
                 getInstance(context).artistDao().insert(ArtistEntity(1, "Pink Floyd", "Progressive Rock", "UK"))
                 getInstance(context).artistDao().insert(ArtistEntity(2, "Santana", "Latin Rock", "US"))
 
+                // Insert album
+                calendar.set(1979, 11, 30)
                 // Insert track
-                getInstance(context).trackDao().insert(TrackEntity(artistId= 1, trackName = "The Thin Ice", duration = 245))
-                getInstance(context).trackDao().insert(TrackEntity(artistId= 1, trackName = "Another Brick in the Wall", duration = 546))
+                getInstance(context).trackDao().insert(TrackEntity(artistId= 1, trackName = "The Thin Ice", duration = 245, dateReleased = calendar.time ))
+                getInstance(context).trackDao().insert(TrackEntity(artistId= 1, trackName = "Another Brick in the Wall", duration = 546, dateReleased = calendar.time ))
 
-                getInstance(context).trackDao().insert(TrackEntity(artistId= 2, trackName = "One Fine Morning", duration = 362))
-                getInstance(context).trackDao().insert(TrackEntity(artistId= 2, trackName = "The Calling", duration = 238))
+                calendar.set(1999, 6, 15)
+                getInstance(context).trackDao().insert(TrackEntity(artistId= 2, trackName = "One Fine Morning", duration = 362, dateReleased = calendar.time ))
+                getInstance(context).trackDao().insert(TrackEntity(artistId= 2, trackName = "The Calling", duration = 238, dateReleased = calendar.time ))
             }
         }
     }
