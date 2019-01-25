@@ -1,6 +1,8 @@
 package android.room.androidroomdemo
 
+import android.room.androidroomdemo.dao.ArtistDao
 import android.room.androidroomdemo.dao.TrackDao
+import android.room.androidroomdemo.entity.ArtistEntity
 import android.room.androidroomdemo.entity.TrackEntity
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
@@ -8,12 +10,19 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import java.io.IOException
+import java.util.*
 
 class TrackEntityTest {
     private lateinit var trackDao: TrackDao
+    private lateinit var artistDao: ArtistDao
     private lateinit var playlistRoomDatabase: PlaylistRoomDatabase
-    private val FAKE_TRACK1 = TrackEntity(trackName = "The Thin Ice", duration = 245)
-    private val FAKE_TRACK2 = TrackEntity(trackName = "Another Brick in the Wall", duration = 546)
+    private val calendar = Calendar.getInstance()
+
+    private val FAKE_TRACK1 = TrackEntity(trackName = "The Thin Ice", artistId = 1, duration = 245, dateReleased = calendar.time)
+    private val FAKE_TRACK2 = TrackEntity(trackName = "Another Brick in the Wall", artistId = 2, duration = 546, dateReleased = calendar.time)
+
+    private val FAKE_ARTIST1 = ArtistEntity(1, "Pink Floyd", "Progressive Rock", "UK")
+    private val FAKE_ARTIST2 = ArtistEntity(2, "Santana", "Latin Rock", "US")
 
     @Before
     fun createDb() {
@@ -21,6 +30,7 @@ class TrackEntityTest {
         playlistRoomDatabase = Room.inMemoryDatabaseBuilder(
             context, PlaylistRoomDatabase::class.java).build()
         trackDao = playlistRoomDatabase.trackDao()
+        artistDao = playlistRoomDatabase.artistDao()
     }
 
     @After
@@ -32,6 +42,9 @@ class TrackEntityTest {
     @Test
     @Throws(Exception::class)
     fun writeUserAndReadInList() {
+        artistDao.insert(FAKE_ARTIST1)
+        artistDao.insert(FAKE_ARTIST2)
+
         trackDao.insert(FAKE_TRACK1)
         trackDao.insert(FAKE_TRACK2)
 
