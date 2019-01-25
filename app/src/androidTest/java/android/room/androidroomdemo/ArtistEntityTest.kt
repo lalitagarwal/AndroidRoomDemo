@@ -5,6 +5,7 @@ import android.room.androidroomdemo.entity.ArtistEntity
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.After
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import java.io.IOException
@@ -38,7 +39,16 @@ class ArtistEntityTest {
         artistDao.insert(FAKE_ARTIST2)
 
         val artistList = artistDao.getArtists()
-        assert(artistList.size == 2)
-        assert(artistList[0].name == FAKE_ARTIST1.name)
+        assertEquals(artistList.size,2)
+        assertEquals(artistList[0].name, FAKE_ARTIST1.name)
+    }
+
+    @Test
+    fun testGetArtistByCountry() {
+        artistDao.insert(FAKE_ARTIST1)
+        artistDao.insert(FAKE_ARTIST2)
+
+        val artistUS = artistDao.getArtistByCountry("US")
+        assertEquals(artistUS.country, FAKE_ARTIST2.country)
     }
 }

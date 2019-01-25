@@ -9,4 +9,7 @@ interface ArtistDao: BaseDao<ArtistEntity> {
 
     @Query("Select * from artists")
     fun getArtists(): List<ArtistEntity>
+
+    @Query("Select * from artists where country = :country")
+    fun getArtistByCountry(country: String): ArtistEntity
 }

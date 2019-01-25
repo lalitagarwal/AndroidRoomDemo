@@ -7,6 +7,7 @@ import android.room.androidroomdemo.entity.TrackEntity
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.After
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import java.io.IOException
@@ -49,7 +50,7 @@ class TrackEntityTest {
         trackDao.insert(FAKE_TRACK2)
 
         val albumList = trackDao.getTracks()
-        assert(albumList.size == 2)
-        assert(albumList[0].trackName == FAKE_TRACK1.trackName)
+        assertEquals(albumList.size, 2)
+        assertEquals(albumList[0].trackName, FAKE_TRACK1.trackName)
     }
 }
