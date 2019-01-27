@@ -6,7 +6,8 @@ import android.room.androidroomdemo.dao.TrackDao
 import android.room.androidroomdemo.entity.*
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -45,7 +46,7 @@ abstract class PlaylistRoomDatabase: RoomDatabase() {
         }
 
         fun populateDb(context: Context) {
-            GlobalScope.launch {
+            CoroutineScope(Dispatchers.IO).launch {
                 val calendar = Calendar.getInstance()
 
                 // Insert Artist
