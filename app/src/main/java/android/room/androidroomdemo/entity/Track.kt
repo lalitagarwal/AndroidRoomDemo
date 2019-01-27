@@ -7,14 +7,14 @@ import java.util.*
 // onDelete = Cascade specifies that if the album is deleted, delete all the tracks of that column
 @Entity(tableName = "tracks",
         foreignKeys = [ForeignKey(
-            entity = ArtistEntity::class,
+            entity = Artist::class,
             parentColumns = ["id"],
             childColumns = ["artist_id"],
             onDelete = CASCADE
         )],
         indices = [Index(value = ["artist_id"])]
 )
-class TrackEntity (
+class Track (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "track_id")
     var trackId: Int = 0,

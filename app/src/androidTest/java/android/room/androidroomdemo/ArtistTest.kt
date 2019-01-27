@@ -1,7 +1,7 @@
 package android.room.androidroomdemo
 
 import android.room.androidroomdemo.dao.ArtistDao
-import android.room.androidroomdemo.entity.ArtistEntity
+import android.room.androidroomdemo.entity.Artist
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.After
@@ -10,12 +10,12 @@ import org.junit.Before
 import org.junit.Test
 import java.io.IOException
 
-class ArtistEntityTest {
+class ArtistTest {
     private lateinit var artistDao: ArtistDao
     private lateinit var playlistRoomDatabase: PlaylistRoomDatabase
 
-    private val FAKE_ARTIST1 = ArtistEntity(1, "Pink Floyd", "Progressive Rock", "UK")
-    private val FAKE_ARTIST2 = ArtistEntity(2, "Santana", "Latin Rock", "US")
+    private val FAKE_ARTIST1 = Artist(1, "Pink Floyd", "Progressive Rock", "UK")
+    private val FAKE_ARTIST2 = Artist(2, "Santana", "Latin Rock", "US")
 
     @Before
     fun createDb() {

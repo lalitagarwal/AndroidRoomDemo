@@ -1,12 +1,12 @@
 package android.room.androidroomdemo.dao
 
-import android.room.androidroomdemo.entity.TrackEntity
+import android.room.androidroomdemo.entity.Track
 import androidx.room.Dao
 import androidx.room.Query
 
 @Dao
-interface TrackDao: BaseDao<TrackEntity> {
+interface TrackDao: BaseDao<Track> {
 
     @Query("SELECT * from tracks")
-    fun getTracks(): List<TrackEntity>
+    fun getTracks(): List<Track>
 }

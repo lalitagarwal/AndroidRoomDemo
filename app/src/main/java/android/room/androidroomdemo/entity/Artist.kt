@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "artists",
         indices = [Index(value = ["genre"])])
-data class ArtistEntity (
+data class Artist (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var id: Int,
