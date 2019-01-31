@@ -1,7 +1,9 @@
 package android.room.androidroomdemo
 
+import android.room.androidroomdemo.TestData.Companion.ARTISTS
+import android.room.androidroomdemo.TestData.Companion.FAKE_ARTIST1
+import android.room.androidroomdemo.TestData.Companion.FAKE_ARTIST2
 import android.room.androidroomdemo.dao.ArtistDao
-import android.room.androidroomdemo.entity.Artist
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.After
@@ -13,9 +15,6 @@ import java.io.IOException
 class ArtistTest {
     private lateinit var artistDao: ArtistDao
     private lateinit var playlistRoomDatabase: PlaylistRoomDatabase
-
-    private val FAKE_ARTIST1 = Artist(1, "Pink Floyd", "Progressive Rock", "UK")
-    private val FAKE_ARTIST2 = Artist(2, "Santana", "Latin Rock", "US")
 
     @Before
     fun createDb() {
@@ -35,8 +34,7 @@ class ArtistTest {
     @Test
     @Throws(Exception::class)
     fun writeUserAndReadInList() {
-        artistDao.insert(FAKE_ARTIST1)
-        artistDao.insert(FAKE_ARTIST2)
+        artistDao.insert(ARTISTS)
 
         val artistList = artistDao.getArtists()
         assertEquals(artistList.size,2)
@@ -45,8 +43,7 @@ class ArtistTest {
 
     @Test
     fun testGetArtistByCountry() {
-        artistDao.insert(FAKE_ARTIST1)
-        artistDao.insert(FAKE_ARTIST2)
+        artistDao.insert(ARTISTS)
 
         val artistUS = artistDao.getArtistByCountry("US")
         assertEquals(artistUS.country, FAKE_ARTIST2.country)

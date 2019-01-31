@@ -1,9 +1,11 @@
 package android.room.androidroomdemo
 
 import android.room.androidroomdemo.TestData.Companion.ARTISTS
-import android.room.androidroomdemo.TestData.Companion.FAKE_TRACK1
+import android.room.androidroomdemo.TestData.Companion.FAKE_ARTIST1
+import android.room.androidroomdemo.TestData.Companion.FAKE_ARTIST2
 import android.room.androidroomdemo.TestData.Companion.TRACKS
 import android.room.androidroomdemo.dao.ArtistDao
+import android.room.androidroomdemo.dao.TrackArtistDao
 import android.room.androidroomdemo.dao.TrackDao
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
@@ -13,18 +15,22 @@ import org.junit.Before
 import org.junit.Test
 import java.io.IOException
 
-class TrackTest {
+class TrackArtistTest {
     private lateinit var trackDao: TrackDao
     private lateinit var artistDao: ArtistDao
+    private lateinit var trackArtistDao: TrackArtistDao
     private lateinit var playlistRoomDatabase: PlaylistRoomDatabase
 
     @Before
     fun createDb() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         playlistRoomDatabase = Room.inMemoryDatabaseBuilder(
-            context, PlaylistRoomDatabase::class.java).build()
+            context, PlaylistRoomDatabase::class.java
+        ).build()
+
         trackDao = playlistRoomDatabase.trackDao()
         artistDao = playlistRoomDatabase.artistDao()
+        trackArtistDao = playlistRoomDatabase.trackArtistDao()
     }
 
     @After
@@ -39,8 +45,7 @@ class TrackTest {
         artistDao.insert(ARTISTS)
         trackDao.insert(TRACKS)
 
-        val albumList = trackDao.getTracks()
-        assertEquals(albumList.size, 4)
-        assertEquals(albumList[0].trackName, FAKE_TRACK1.trackName)
+        val artistList = trackArtistDao.getTrackArtist()
+        assertEquals(artistList.size,4)
     }
 }
