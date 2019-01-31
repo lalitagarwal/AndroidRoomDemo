@@ -14,7 +14,7 @@ import java.util.*
         )],
         indices = [Index(value = ["artist_id"])]
 )
-class Track (
+data class Track (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "track_id")
     var trackId: Int = 0,
@@ -30,4 +30,9 @@ class Track (
 
     @ColumnInfo(name = "date_released")
     var dateReleased: Date
-)
+) {
+
+    override fun toString(): String {
+        return "$trackName, $duration sec"
+    }
+}

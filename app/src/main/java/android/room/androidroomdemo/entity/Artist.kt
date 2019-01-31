@@ -20,4 +20,8 @@ data class Artist (
 
     @ColumnInfo(name = "country")
     var country: String
-)
+) {
+    override fun toString(): String {
+        return "$name, $genre, $country"
+    }
+}
