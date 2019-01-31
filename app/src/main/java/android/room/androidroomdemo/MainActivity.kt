@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.room.androidroomdemo.adapter.ItemAdapter
 import android.room.androidroomdemo.entity.Artist
 import android.room.androidroomdemo.entity.Track
+import android.room.androidroomdemo.entity.TrackArtistJoin
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     private fun setList() {
         var artistList: List<Artist>? = null
         var tracksList: List<Track>? = null
-        var tracksArtistList: List<Track>? = null
+        var tracksArtistList: List<TrackArtistJoin>? = null
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -56,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             try {
                 withContext(IO) {
                     tracksArtistList =
-                        (applicationContext as? PlaylistApplication)?.playlistRoomDatabase?.trackDao()?.getTracks()
+                        (applicationContext as? PlaylistApplication)?.playlistRoomDatabase?.trackArtistDao()?.getTrackArtist()
                 }
                 val list = tracksArtistList?.map { it.toString() }
                 rv_track_artist.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)

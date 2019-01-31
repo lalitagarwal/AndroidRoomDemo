@@ -31,7 +31,6 @@ data class Track (
     @ColumnInfo(name = "date_released")
     var dateReleased: Date
 ) {
-
     override fun toString(): String {
         return "$trackName, $duration sec"
     }

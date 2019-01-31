@@ -2,6 +2,7 @@ package android.room.androidroomdemo
 
 import android.content.Context
 import android.room.androidroomdemo.dao.ArtistDao
+import android.room.androidroomdemo.dao.TrackArtistDao
 import android.room.androidroomdemo.dao.TrackDao
 import android.room.androidroomdemo.entity.*
 import androidx.room.*
@@ -18,6 +19,7 @@ import java.util.*
 abstract class PlaylistRoomDatabase: RoomDatabase() {
     abstract fun trackDao(): TrackDao
     abstract fun artistDao(): ArtistDao
+    abstract fun trackArtistDao(): TrackArtistDao
 
     companion object {
         var playlistRoomDatabase: PlaylistRoomDatabase? = null
