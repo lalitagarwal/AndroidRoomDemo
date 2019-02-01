@@ -22,7 +22,7 @@ abstract class PlaylistRoomDatabase: RoomDatabase() {
     abstract fun trackArtistDao(): TrackArtistDao
 
     companion object {
-        var playlistRoomDatabase: PlaylistRoomDatabase? = null
+        private var playlistRoomDatabase: PlaylistRoomDatabase? = null
 
         fun getInstance(context: Context): PlaylistRoomDatabase {
             return playlistRoomDatabase?.let {
@@ -32,7 +32,7 @@ abstract class PlaylistRoomDatabase: RoomDatabase() {
             }
         }
 
-        fun buildDbInstance(context: Context): PlaylistRoomDatabase {
+        private fun buildDbInstance(context: Context): PlaylistRoomDatabase {
             return Room.databaseBuilder(
                 context,
                 PlaylistRoomDatabase::class.java,

@@ -8,5 +8,5 @@ import androidx.room.Query
 interface TrackArtistDao {
 
     @Query("SELECT * from TrackArtistJoin")
-    abstract fun getTrackArtist(): List<TrackArtistJoin>
+    fun getTrackArtist(): List<TrackArtistJoin>
 }

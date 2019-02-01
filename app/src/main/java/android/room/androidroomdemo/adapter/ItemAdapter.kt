@@ -5,6 +5,7 @@ import android.room.androidroomdemo.R
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_layout.view.*
 
@@ -27,6 +28,6 @@ class ItemAdapter(private var context: Context?,
     }
 
     class ItemViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        var tvName = view.tv_name
+        var tvName: TextView = view.tv_name
     }
 }

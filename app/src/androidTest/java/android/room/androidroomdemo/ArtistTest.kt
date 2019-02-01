@@ -1,8 +1,6 @@
 package android.room.androidroomdemo
 
 import android.room.androidroomdemo.TestData.Companion.ARTISTS
-import android.room.androidroomdemo.TestData.Companion.FAKE_ARTIST1
-import android.room.androidroomdemo.TestData.Companion.FAKE_ARTIST2
 import android.room.androidroomdemo.dao.ArtistDao
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
@@ -38,7 +36,7 @@ class ArtistTest {
 
         val artistList = artistDao.getArtists()
         assertEquals(artistList.size,2)
-        assertEquals(artistList[0].name, FAKE_ARTIST1.name)
+        assertEquals(artistList[0].name, ARTISTS[0].name)
     }
 
     @Test
@@ -46,6 +44,6 @@ class ArtistTest {
         artistDao.insert(ARTISTS)
 
         val artistUS = artistDao.getArtistByCountry("US")
-        assertEquals(artistUS.country, FAKE_ARTIST2.country)
+        assertEquals(artistUS.country, ARTISTS[1].country)
     }
 }

@@ -14,7 +14,7 @@ class DateToLongConverter {
         @TypeConverter
         @JvmStatic
         fun toLong(dateVal: Date?): Long? {
-            return if (dateVal == null) null else dateVal.time
+            return dateVal?.time
         }
     }
 }

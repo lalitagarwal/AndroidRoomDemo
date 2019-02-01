@@ -1,7 +1,6 @@
 package android.room.androidroomdemo
 
 import android.room.androidroomdemo.TestData.Companion.ARTISTS
-import android.room.androidroomdemo.TestData.Companion.FAKE_TRACK1
 import android.room.androidroomdemo.TestData.Companion.TRACKS
 import android.room.androidroomdemo.dao.ArtistDao
 import android.room.androidroomdemo.dao.TrackDao
@@ -41,6 +40,6 @@ class TrackTest {
 
         val albumList = trackDao.getTracks()
         assertEquals(albumList.size, 4)
-        assertEquals(albumList[0].trackName, FAKE_TRACK1.trackName)
+        assertEquals(albumList[0].trackName, TRACKS[0].trackName)
     }
 }
