@@ -81,14 +81,14 @@ class MainActivity : AppCompatActivity() {
                         (applicationContext as? PlaylistApplication)?.playlistRoomDatabase?.artistDao()?.getArtistsAndAllTracks()
                 }
                 val list = artistAndAllTracks?.map { it.toString() }
-                rv_track_artist.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
-                rv_track_artist.adapter = ItemAdapter(applicationContext, list)
-                tv_track_artist_join.visibility = VISIBLE
+                rv_artist_all_tracks.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
+                rv_artist_all_tracks.adapter = ItemAdapter(applicationContext, list)
+                tv_artist_all_tracks.visibility = VISIBLE
             } catch (e: Exception) {}
         }
 
         // Artist Track Join List
-        /*CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.IO).launch {
             try {
                 withContext(IO) {
                     tracksArtistList =
@@ -99,6 +99,6 @@ class MainActivity : AppCompatActivity() {
                 rv_track_artist.adapter = ItemAdapter(applicationContext, list)
                 tv_track_artist_join.visibility = VISIBLE
             } catch (e: Exception) {}
-        }*/
+        }
     }
 }

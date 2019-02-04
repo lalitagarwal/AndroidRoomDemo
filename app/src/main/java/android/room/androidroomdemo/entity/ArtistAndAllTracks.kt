@@ -12,9 +12,9 @@ data class ArtistAndAllTracks (
     val tracksList:  List<Track>
 ) {
     override fun toString(): String {
-        var str = artist.name + " "
+        var str = artist.name + " tracks - "
         tracksList.forEach {
-            str += it.trackName + " "
+            str += it.trackName + ", "
         }
         return str
     }

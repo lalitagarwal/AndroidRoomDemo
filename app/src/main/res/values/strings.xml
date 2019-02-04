@@ -3,5 +3,6 @@
     <string name="text_artists_list">Artists List</string>
     <string name="text_tracks_list">Tracks List</string>
     <string name="text_tracks_like">Tracks containing the word "the"</string>
+    <string name="text_artist_all_tracks_artist_joined_list">Tracks By Artists</string>
     <string name="text_tracks_artist_joined_list">Tracks Artist Joined List</string>
 </resources>
