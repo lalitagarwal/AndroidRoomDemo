@@ -3,8 +3,10 @@ package android.room.androidroomdemo
 import android.os.Bundle
 import android.room.androidroomdemo.adapter.ItemAdapter
 import android.room.androidroomdemo.entity.Artist
+import android.room.androidroomdemo.entity.ArtistAndAllTracks
 import android.room.androidroomdemo.entity.Track
 import android.room.androidroomdemo.entity.TrackArtistJoin
+import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,8 +29,10 @@ class MainActivity : AppCompatActivity() {
     private fun setList() {
         var artistList: List<Artist>? = null
         var tracksList: List<Track>? = null
+        var artistAndAllTracks: List<ArtistAndAllTracks>? = null
         var tracksArtistList: List<TrackArtistJoin>? = null
 
+        // Artist List
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 withContext(IO) {
@@ -38,9 +42,11 @@ class MainActivity : AppCompatActivity() {
                 val list = artistList?.map { it.toString() }
                 rv_artists.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
                 rv_artists.adapter = ItemAdapter(applicationContext, list)
+                tv_artist.visibility = VISIBLE
             } catch (e: Exception) {}
         }
 
+        // Track List
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 withContext(IO) {
@@ -50,10 +56,39 @@ class MainActivity : AppCompatActivity() {
                 val list = tracksList?.map { it.toString() }
                 rv_tracks.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
                 rv_tracks.adapter = ItemAdapter(applicationContext, list)
+                tv_tracks.visibility = VISIBLE
+            } catch (e: Exception) {}
+        }
+
+        // Tracks containing the word 'THE`
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                withContext(IO) {
+                    tracksList =
+                        (applicationContext as? PlaylistApplication)?.playlistRoomDatabase?.trackDao()?.getTracksWithKeyword("%the%")
+                }
+                val list = tracksList?.map { it.toString() }
+                rv_tracks_like.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
+                rv_tracks_like.adapter = ItemAdapter(applicationContext, list)
+                tv_tracks_like.visibility = VISIBLE
             } catch (e: Exception) {}
         }
 
         CoroutineScope(Dispatchers.IO).launch {
+            try {
+                withContext(IO) {
+                    artistAndAllTracks =
+                        (applicationContext as? PlaylistApplication)?.playlistRoomDatabase?.artistDao()?.getArtistsAndAllTracks()
+                }
+                val list = artistAndAllTracks?.map { it.toString() }
+                rv_track_artist.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
+                rv_track_artist.adapter = ItemAdapter(applicationContext, list)
+                tv_track_artist_join.visibility = VISIBLE
+            } catch (e: Exception) {}
+        }
+
+        // Artist Track Join List
+        /*CoroutineScope(Dispatchers.IO).launch {
             try {
                 withContext(IO) {
                     tracksArtistList =
@@ -62,7 +97,8 @@ class MainActivity : AppCompatActivity() {
                 val list = tracksArtistList?.map { it.toString() }
                 rv_track_artist.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
                 rv_track_artist.adapter = ItemAdapter(applicationContext, list)
+                tv_track_artist_join.visibility = VISIBLE
             } catch (e: Exception) {}
-        }
+        }*/
     }
 }
