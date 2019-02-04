@@ -20,8 +20,11 @@ class TrackTest {
     @Before
     fun createDb() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
-        playlistRoomDatabase = Room.inMemoryDatabaseBuilder(
-            context, PlaylistRoomDatabase::class.java).build()
+        // using an in-memory database because the information stored here disappears after test
+        playlistRoomDatabase = Room.inMemoryDatabaseBuilder(context, PlaylistRoomDatabase::class.java)
+            // allowing main thread queries, just for testing
+            .allowMainThreadQueries()
+            .build()
         trackDao = playlistRoomDatabase.trackDao()
         artistDao = playlistRoomDatabase.artistDao()
     }
@@ -39,7 +42,7 @@ class TrackTest {
         trackDao.insert(TRACKS)
 
         val albumList = trackDao.getTracks()
-        assertEquals(albumList.size, 4)
+        assertEquals(4, albumList.size)
         assertEquals(albumList[0].trackName, TRACKS[0].trackName)
     }
 }

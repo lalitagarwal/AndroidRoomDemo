@@ -8,7 +8,6 @@ import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import java.io.IOException
 
 class ArtistTest {
     private lateinit var artistDao: ArtistDao
@@ -19,23 +18,23 @@ class ArtistTest {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         playlistRoomDatabase = Room.inMemoryDatabaseBuilder(
             context, PlaylistRoomDatabase::class.java
-        ).build()
+        )
+            .allowMainThreadQueries()
+            .build()
         artistDao = playlistRoomDatabase.artistDao()
     }
 
     @After
-    @Throws(IOException::class)
     fun closeDb() {
         playlistRoomDatabase.close()
     }
 
     @Test
-    @Throws(Exception::class)
     fun writeUserAndReadInList() {
         artistDao.insert(ARTISTS)
 
         val artistList = artistDao.getArtists()
-        assertEquals(artistList.size,2)
+        assertEquals(2, artistList.size)
         assertEquals(artistList[0].name, ARTISTS[0].name)
     }
 

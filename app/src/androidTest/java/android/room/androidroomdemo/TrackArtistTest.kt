@@ -11,7 +11,6 @@ import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import java.io.IOException
 
 class TrackArtistTest {
     private lateinit var trackDao: TrackDao
@@ -24,7 +23,9 @@ class TrackArtistTest {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         playlistRoomDatabase = Room.inMemoryDatabaseBuilder(
             context, PlaylistRoomDatabase::class.java
-        ).build()
+        )
+            .allowMainThreadQueries()
+            .build()
 
         trackDao = playlistRoomDatabase.trackDao()
         artistDao = playlistRoomDatabase.artistDao()
@@ -32,18 +33,16 @@ class TrackArtistTest {
     }
 
     @After
-    @Throws(IOException::class)
     fun closeDb() {
         playlistRoomDatabase.close()
     }
 
     @Test
-    @Throws(Exception::class)
     fun writeUserAndReadInList() {
         artistDao.insert(ARTISTS)
         trackDao.insert(TRACKS)
 
         val artistList = trackArtistDao.getTrackArtist()
-        assertEquals(artistList.size,4)
+        assertEquals(4, artistList.size)
     }
 }
