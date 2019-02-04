@@ -1,0 +1,16 @@
+package android.room.androidroomdemo
+
+import android.app.Application
+import com.facebook.stetho.Stetho
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
+class PlaylistApplication : Application() {
+
+    override fun onCreate() {
+        super.onCreate()
+
+        Stetho.initializeWithDefaults(this)
+    }
+}
