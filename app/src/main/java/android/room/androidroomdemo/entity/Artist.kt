@@ -1,5 +1,6 @@
 package android.room.androidroomdemo.entity
 
+import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
@@ -13,6 +14,7 @@ data class Artist (
     var id: Int,
 
     @ColumnInfo(name = "name")
+    @NonNull
     var name: String,
 
     @ColumnInfo(name = "genre")

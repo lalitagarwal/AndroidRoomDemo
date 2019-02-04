@@ -1,5 +1,6 @@
 package android.room.androidroomdemo.entity
 
+import androidx.annotation.NonNull
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
 import java.util.*
@@ -23,6 +24,7 @@ data class Track (
     var artistId: Int,
 
     @ColumnInfo(name = "track_name")
+    @NonNull
     var trackName: String,
 
     @ColumnInfo(name = "duration")

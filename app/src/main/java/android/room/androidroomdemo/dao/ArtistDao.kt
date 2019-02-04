@@ -1,6 +1,7 @@
 package android.room.androidroomdemo.dao
 
 import android.room.androidroomdemo.entity.Artist
+import android.room.androidroomdemo.entity.ArtistAndAllTracks
 import androidx.room.Dao
 import androidx.room.Query
 
@@ -12,4 +13,7 @@ interface ArtistDao: BaseDao<Artist> {
 
     @Query("Select * from artists where country = :country")
     fun getArtistByCountry(country: String): Artist
+
+    @Query("SELECT * from artists")
+    fun getArtistsAndAllTracks(): List<ArtistAndAllTracks>
 }
