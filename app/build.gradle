@@ -37,11 +37,13 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     
     // Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.0"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.0"
 
     // Stetho
     implementation 'com.facebook.stetho:stetho:1.5.0'
+
+    // Recycler view
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
 
     // Tests
     testImplementation 'junit:junit:4.12'
