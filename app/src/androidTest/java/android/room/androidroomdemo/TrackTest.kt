@@ -1,7 +1,7 @@
 package android.room.androidroomdemo
 
-import android.room.androidroomdemo.TestData.Companion.ARTISTS
-import android.room.androidroomdemo.TestData.Companion.TRACKS
+import android.room.androidroomdemo.TestData.ARTISTS
+import android.room.androidroomdemo.TestData.TRACKS
 import android.room.androidroomdemo.dao.ArtistDao
 import android.room.androidroomdemo.dao.TrackDao
 import androidx.room.Room

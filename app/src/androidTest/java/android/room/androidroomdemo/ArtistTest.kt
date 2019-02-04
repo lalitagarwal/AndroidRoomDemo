@@ -1,6 +1,6 @@
 package android.room.androidroomdemo
 
-import android.room.androidroomdemo.TestData.Companion.ARTISTS
+import android.room.androidroomdemo.TestData.ARTISTS
 import android.room.androidroomdemo.dao.ArtistDao
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
