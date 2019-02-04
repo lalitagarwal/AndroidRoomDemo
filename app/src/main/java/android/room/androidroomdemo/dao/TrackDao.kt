@@ -9,4 +9,7 @@ interface TrackDao: BaseDao<Track> {
 
     @Query("SELECT * from tracks")
     fun getTracks(): List<Track>
+
+    @Query("SELECT * from tracks WHERE track_name LIKE :keyword")
+    fun getTracksWithKeyword(keyword: String): List<Track>
 }
