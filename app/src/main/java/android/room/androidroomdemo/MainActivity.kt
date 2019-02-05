@@ -57,20 +57,7 @@ class MainActivity : AppCompatActivity() {
 //            } catch (e: Exception) {}
 //        }
 
-        // Tracks containing the word 'THE`
-//        CoroutineScope(Dispatchers.IO).launch {
-//            try {
-//                withContext(IO) {
-//                    tracksList =
-//                        (applicationContext as? PlaylistApplication)?.playlistRoomDatabase?.trackDao()?.getTracksWithKeyword("%the%")
-//                }
-//                val list = tracksList?.map { it.toString() }
-//                rv_tracks_like.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
-//                rv_tracks_like.adapter = ItemAdapter(applicationContext, list)
-//                tv_tracks_like.visibility = VISIBLE
-//            } catch (e: Exception) {}
-//        }
-
+        // Artist and All Tracks List
 //        CoroutineScope(Dispatchers.IO).launch {
 //            try {
 //                withContext(IO) {
