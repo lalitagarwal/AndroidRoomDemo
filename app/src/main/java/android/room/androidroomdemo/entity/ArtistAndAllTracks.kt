@@ -8,7 +8,7 @@ data class ArtistAndAllTracks(
     @Embedded
     var artist: Artist,
 
-    @Relation(entity = Track::class, entityColumn = "artist_id", parentColumn = "artist_id")
+    @Relation(entity = Track::class, entityColumn = "artist_id", parentColumn = "id")
     var tracksList: List<Track>
 ) {
     override fun toString(): String {

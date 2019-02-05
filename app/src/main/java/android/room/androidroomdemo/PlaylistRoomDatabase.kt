@@ -5,6 +5,7 @@ import android.room.androidroomdemo.dao.ArtistDao
 import android.room.androidroomdemo.dao.TrackDao
 import android.room.androidroomdemo.entity.Artist
 import android.room.androidroomdemo.entity.Track
+import android.room.androidroomdemo.entity.TrackArtistJoin
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -12,9 +13,11 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.*
 
-@Database(entities = [Artist::class, Track::class], version = 1)
+@Database(entities = [Artist::class, Track::class],
+          views = [TrackArtistJoin::class],
+          exportSchema = false,
+          version = 1)
 abstract class PlaylistRoomDatabase: RoomDatabase() {
     abstract fun artistDao(): ArtistDao
     abstract fun trackDao(): TrackDao

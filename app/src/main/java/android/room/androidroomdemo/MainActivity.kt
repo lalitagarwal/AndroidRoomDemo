@@ -5,6 +5,7 @@ import android.room.androidroomdemo.adapter.ItemAdapter
 import android.room.androidroomdemo.entity.Artist
 import android.room.androidroomdemo.entity.ArtistAndAllTracks
 import android.room.androidroomdemo.entity.Track
+import android.room.androidroomdemo.entity.TrackArtistJoin
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         var artistList: List<Artist>? = null
         var tracksList: List<Track>? = null
         var artistAndAllTracks: List<ArtistAndAllTracks>? = null
-//        var tracksArtistList: List<TrackArtistJoin>? = null
+        var tracksArtistList: List<TrackArtistJoin>? = null
 
         // Artist List
         CoroutineScope(Dispatchers.IO).launch {
@@ -74,17 +75,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Artist Track Join List
-//        CoroutineScope(Dispatchers.IO).launch {
-//            try {
-//                withContext(IO) {
-//                    tracksArtistList =
-//                        (applicationContext as? PlaylistApplication)?.playlistRoomDatabase?.trackArtistDao()?.getTrackArtist()
-//                }
-//                val list = tracksArtistList?.map { it.toString() }
-//                rv_track_artist.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
-//                rv_track_artist.adapter = ItemAdapter(applicationContext, list)
-//                tv_track_artist_join.visibility = VISIBLE
-//            } catch (e: Exception) {}
-//        }
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                withContext(IO) {
+                    tracksArtistList =
+                        (applicationContext as? PlaylistApplication)?.playlistRoomDatabase?.trackDao()?.getTrackArtist()
+                }
+                val list = tracksArtistList?.map { it.toString() }
+                rv_track_artist.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
+                rv_track_artist.adapter = ItemAdapter(applicationContext, list)
+                tv_track_artist_join.visibility = VISIBLE
+            } catch (e: Exception) {}
+        }
     }
 }

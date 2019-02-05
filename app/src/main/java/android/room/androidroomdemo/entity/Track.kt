@@ -1,11 +1,18 @@
 package android.room.androidroomdemo.entity
 
 import androidx.annotation.NonNull
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
+import androidx.room.ForeignKey.CASCADE
 
-@Entity(tableName = "track")
+@Entity(tableName = "track",
+        foreignKeys = [ForeignKey(
+            entity = Artist::class,
+            parentColumns = ["id"],
+            childColumns = ["artist_id"],
+            onDelete = CASCADE
+        )],
+        indices = [Index(value = ["artist_id"])]
+)
 data class Track(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "track_id")
