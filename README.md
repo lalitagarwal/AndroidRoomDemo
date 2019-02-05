@@ -8,8 +8,8 @@ fun populateDb(context: Context) {
                 val calendar = Calendar.getInstance()
 
                 // Insert Artist
-                getInstance(context).artistDao().insert(Artist("Pink Floyd", "Progressive Rock", "UK"))
-                getInstance(context).artistDao().insert(Artist("Santana", "Latin Rock", "US"))
+                 getInstance(context).artistDao().insert(Artist(name = "Pink Floyd", genre = "Progressive Rock", country = "UK"))
+                getInstance(context).artistDao().insert(Artist(name = "Santana", genre = "Latin Rock", country = "US"))
 
                 // Insert album
                 calendar.set(1979, 11, 30)
