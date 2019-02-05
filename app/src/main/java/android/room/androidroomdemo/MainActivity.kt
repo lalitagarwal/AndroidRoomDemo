@@ -3,6 +3,7 @@ package android.room.androidroomdemo
 import android.os.Bundle
 import android.room.androidroomdemo.adapter.ItemAdapter
 import android.room.androidroomdemo.entity.Artist
+import android.room.androidroomdemo.entity.ArtistAndAllTracks
 import android.room.androidroomdemo.entity.Track
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     private fun setList() {
         var artistList: List<Artist>? = null
         var tracksList: List<Track>? = null
-//        var artistAndAllTracks: List<ArtistAndAllTracks>? = null
+        var artistAndAllTracks: List<ArtistAndAllTracks>? = null
 //        var tracksArtistList: List<TrackArtistJoin>? = null
 
         // Artist List
@@ -59,18 +60,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Artist and All Tracks List
-//        CoroutineScope(Dispatchers.IO).launch {
-//            try {
-//                withContext(IO) {
-//                    artistAndAllTracks =
-//                        (applicationContext as? PlaylistApplication)?.playlistRoomDatabase?.artistDao()?.getArtistsAndAllTracks()
-//                }
-//                val list = artistAndAllTracks?.map { it.toString() }
-//                rv_artist_all_tracks.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
-//                rv_artist_all_tracks.adapter = ItemAdapter(applicationContext, list)
-//                tv_artist_all_tracks.visibility = VISIBLE
-//            } catch (e: Exception) {}
-//        }
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                withContext(IO) {
+                    artistAndAllTracks =
+                        (applicationContext as? PlaylistApplication)?.playlistRoomDatabase?.artistDao()?.getArtistsAndAllTracks()
+                }
+                val list = artistAndAllTracks?.map { it.toString() }
+                rv_artist_all_tracks.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
+                rv_artist_all_tracks.adapter = ItemAdapter(applicationContext, list)
+                tv_artist_all_tracks.visibility = VISIBLE
+            } catch (e: Exception) {}
+        }
 
         // Artist Track Join List
 //        CoroutineScope(Dispatchers.IO).launch {

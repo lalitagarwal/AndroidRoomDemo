@@ -11,6 +11,9 @@ data class Track(
     @ColumnInfo(name = "track_id")
     var trackId: Int = 0,
 
+    @ColumnInfo(name = "artist_id")
+    var artistId: Int,
+
     @ColumnInfo(name = "track_name")
     @NonNull
     var trackName: String,

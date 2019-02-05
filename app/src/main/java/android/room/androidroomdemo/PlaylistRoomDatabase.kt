@@ -52,11 +52,11 @@ abstract class PlaylistRoomDatabase: RoomDatabase() {
                 getInstance(context).artistDao().insert(Artist(name = "Santana", genre = "Latin Rock", country = "US"))
 
                 // Insert track
-                getInstance(context).trackDao().insert(Track(trackName = "The Thin Ice", duration = 245))
-                getInstance(context).trackDao().insert(Track(trackName = "Another Brick in the Wall", duration = 546))
+                getInstance(context).trackDao().insert(Track(artistId = 1, trackName = "The Thin Ice", duration = 245))
+                getInstance(context).trackDao().insert(Track(artistId = 1, trackName = "Another Brick in the Wall", duration = 546))
 
-                getInstance(context).trackDao().insert(Track(trackName = "One Fine Morning", duration = 362))
-                getInstance(context).trackDao().insert(Track(trackName = "The Calling", duration = 238))
+                getInstance(context).trackDao().insert(Track(artistId = 2, trackName = "One Fine Morning", duration = 362))
+                getInstance(context).trackDao().insert(Track(artistId = 2, trackName = "The Calling", duration = 238))
             }
         }
     }
